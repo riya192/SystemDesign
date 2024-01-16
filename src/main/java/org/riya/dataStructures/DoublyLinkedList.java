@@ -53,31 +53,18 @@ public class DoublyLinkedList<Key> {
 
     // 4->1->2->3->5
     // 4<-1<-2<-3<-5
-    public void moveElementToHead(Key key)
+    public void moveElementToHead(DoublyLinkedListNode<Key> node)
     {
-        if(head.getNodeVal() == key) return;
-        DoublyLinkedListNode<Key> curr;
-        DoublyLinkedListNode<Key> currPrev;
-        DoublyLinkedListNode<Key> currNext;
-        curr = head; currPrev = head.getPrev();currNext= head.getNext();
-        while(curr!=null)
-        {
-            currNext = curr.getNext();
-            currPrev = curr.getPrev();
-            if(curr.getNodeVal() == key){
-                break;
-            }
-            curr = currNext;
+        if(head.getNodeVal() == node.getNodeVal()) return;
+        DoublyLinkedListNode<Key> currPrev = node.getPrev();
+        DoublyLinkedListNode<Key> currNext=node.getNext();
+        currPrev.setNext(currNext);
+        if (currNext != null) {
+            currNext.setPrev(currPrev);
+        } else {
+            this.tail = currPrev;
         }
-        if(curr != null){
-            currPrev.setNext(currNext);
-            if(currNext!=null){
-                currNext.setPrev(currPrev);
-            }else{
-                this.tail = currPrev;
-            }
-        }
-        this.addElementToHead(new DoublyLinkedListNode<>(key));
+        this.addElementToHead(node);
     }
 
 }

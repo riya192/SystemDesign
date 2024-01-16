@@ -2,17 +2,19 @@ package org.riya.replacementPolicy;
 
 import org.riya.dataStructures.DoublyLinkedList;
 import org.riya.dataStructures.DoublyLinkedListNode;
+import org.w3c.dom.Node;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LeastRecentlyUsedCacheReplacement<Key> implements CacheReplacement<Key>{
 
     DoublyLinkedList<Key> cacheDll;
+    Map<Key, DoublyLinkedListNode<Key>> nodeMap;
 
     public LeastRecentlyUsedCacheReplacement()
     {
         cacheDll = new DoublyLinkedList<>();
+        nodeMap = new HashMap<>();
     }
 
     /*
@@ -22,9 +24,11 @@ public class LeastRecentlyUsedCacheReplacement<Key> implements CacheReplacement<
     public boolean accessKey(Key key, boolean newKey){
         if(newKey)
         {
-            cacheDll.addElementToHead(new DoublyLinkedListNode<>(key));
+            DoublyLinkedListNode<Key> node = new DoublyLinkedListNode<>(key);
+            cacheDll.addElementToHead(node);
+            nodeMap.put(key, node);
         }else {
-            cacheDll.moveElementToHead(key);
+            cacheDll.moveElementToHead(nodeMap.get(key));
         }
         return true;
     }
