@@ -2,7 +2,6 @@ package org.riya.replacementPolicy;
 
 import org.riya.dataStructures.DoublyLinkedList;
 import org.riya.dataStructures.DoublyLinkedListNode;
-import org.w3c.dom.Node;
 
 import java.util.*;
 

@@ -1,5 +1,8 @@
 package org.riya;
 
+import org.riya.cache.Cache;
+import org.riya.cache.CacheFactory;
+import org.riya.cache.CacheType;
 import org.riya.cache.LRUCache;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -10,12 +13,13 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.printf("Testing LRU Cache!");
 
-        LRUCache<Integer, String> lruCache = new LRUCache<>(3);
+        CacheFactory<Integer, String> cacheFactory = new CacheFactory<>();
+        Cache<Integer, String> lruCache = cacheFactory.getCacheInstance(CacheType.LRU, 3);
 
         lruCache.putInCache(1, "riya");
 
 
-//        lruCache.getFromCache(2);
+        lruCache.getFromCache(2);
 
         lruCache.putInCache(2, "harsh");
 
