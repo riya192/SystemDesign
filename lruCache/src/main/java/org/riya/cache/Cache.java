@@ -5,9 +5,11 @@ import org.riya.replacementPolicy.CacheReplacement;
 
 public interface Cache<Key, Value>{
 
-    public Value getFromCache(Key key);
 
-    public void putInCache(Key key, Value value);
+    //TODO: how here can you use a composition? is there a need? should I make this an abstract class with storage and replacement policy to be changed in setters
+    Value getFromCache(Key key);
 
-    public void printCache();
+    void putInCache(Key key, Value value);
+
+    void printCache();
 }
