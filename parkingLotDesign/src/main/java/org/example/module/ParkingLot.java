@@ -23,11 +23,11 @@ public class ParkingLot {
             parkingLot.put(i, new Slot(i));
         }
     }
-    public void parkCar(Car newCar, int slotId)
+    public void parkCar(Vehicle vehicle, int slotId)
     {
         if(validateSlotId(slotId)) throw new InvalidSlotNumberException();
         if(verifyIfSlotAlreadyOccupied(slotId)) throw new SlotOccupiedException();
-        parkingLot.get(slotId).setAssignedCar(newCar);
+        parkingLot.get(slotId).setAssiggnedVehicle(vehicle);
     }
 
     public void unParkCar(int slotId)
@@ -50,7 +50,7 @@ public class ParkingLot {
 
     private boolean verifyIfSlotAlreadyOccupied(int id)
     {
-        return !(parkingLot.get(id).getAssignedCar() == null);
+        return !(parkingLot.get(id).getAssiggnedVehicle() == null);
     }
 
     public boolean isParkingLotFull()

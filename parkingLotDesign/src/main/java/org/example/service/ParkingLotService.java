@@ -5,10 +5,10 @@ import org.example.exception.*;
 import org.example.module.Car;
 import org.example.module.ParkingLot;
 import org.example.module.Slot;
+import org.example.module.Vehicle;
 import org.example.strategy.ParkingStrategy;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Setter
@@ -24,11 +24,11 @@ public class ParkingLotService {
         parkingStrategy.initialize(capacity);
     }
 
-    public void parkCar(Car car)
+    public void parkCar(Vehicle vehicle)
     {
         try {
             int nextClosestAvailableSlot = this.parkingStrategy.getNextAvailableSlot();
-            parkingLot.parkCar(car, nextClosestAvailableSlot);
+            parkingLot.parkCar(vehicle, nextClosestAvailableSlot);
             parkingStrategy.removeSlot(nextClosestAvailableSlot);
 
         }catch (ParkingSlotFullException ex)
@@ -61,7 +61,7 @@ public class ParkingLotService {
     {
         return getSlotsForAColour(expectedColour)
                     .stream()
-                    .map(slot -> slot.getAssignedCar().getRegistrationNumber())
+                    .map(slot -> slot.getAssiggnedVehicle().getRegistrationNumber())
                     .collect(Collectors.toList());
     }
 
@@ -78,7 +78,7 @@ public class ParkingLotService {
         try{
             return parkingLot.getAllAssignedSlots()
                     .stream()
-                    .filter(slot -> slot.getAssignedCar().getRegistrationNumber().equals(regNumber))
+                    .filter(slot -> slot.getAssiggnedVehicle().getRegistrationNumber().equals(regNumber))
                     .findAny().orElseThrow(CarNotFoundException::new).getSlotId();
         }catch (ParkingLotNotCreatedException ex)
         {
@@ -92,7 +92,7 @@ public class ParkingLotService {
         try{
             return parkingLot.getAllAssignedSlots()
                     .stream()
-                    .filter(slot -> slot.getAssignedCar().getColour().equals(expectedColour))
+                    .filter(slot -> slot.getAssiggnedVehicle().getColour().equals(expectedColour))
                     .collect(Collectors.toList());
         }catch (ParkingLotNotCreatedException ex)
         {

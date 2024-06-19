@@ -1,6 +1,8 @@
 package org.example.command;
 
 import org.example.module.Car;
+import org.example.module.Vehicle;
+import org.example.module.VehicleFactory;
 import org.example.service.ParkingLotService;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class ParkCarCommand extends ParkingLotCommandAbstractClass{
     public void execute(List<String> params) {
         String regNo = params.getFirst();
         String colour = params.getLast();
-        this.parkingLotService.parkCar(new Car(regNo, colour));
+        String vehicleType = params.get(1);
+        this.parkingLotService.parkCar(VehicleFactory.getInstance(vehicleType, regNo, colour));
     }
 }

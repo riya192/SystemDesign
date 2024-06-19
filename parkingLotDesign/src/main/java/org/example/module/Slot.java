@@ -11,14 +11,14 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Slot {
     private int slotId;
-    private Car assignedCar;
+    private Vehicle assiggnedVehicle;
     public Slot(int slotId) {
         this.slotId = slotId;
-        this.assignedCar = null;
+        this.assiggnedVehicle = null;
     }
     public boolean isSlotEmpty()
     {
-        return assignedCar == null;
+        return assiggnedVehicle == null;
     }
 
     public boolean isSlotFull()
@@ -28,7 +28,7 @@ public class Slot {
 
     public void makeSlotEmpty()
     {
-        this.setAssignedCar(null);
+        this.setAssiggnedVehicle(null);
     }
 
     @Override
@@ -41,6 +41,6 @@ public class Slot {
 
     private String getAssignedCarInfo()
     {
-        return assignedCar == null ? "null" : assignedCar.toString();
+        return assiggnedVehicle == null ? "null" : assiggnedVehicle.toString();
     }
 }

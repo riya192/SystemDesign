@@ -16,7 +16,8 @@ public class CreateParkingLotCommand extends ParkingLotCommandAbstractClass{
     @Override
     public void execute(List<String> params) {
         int capacity = Integer.parseInt(params.get(0));
-        String parkingStrategy = params.get(1); // can be used to call parking strategy factory class if available
+        String parkingStrategy = params.get(1);
+        // can be used to call parking strategy factory class if available and instead use dependency injection
         this.parkingLotService.createParkingLot(capacity, new LeastAvailableParkingStrategy());
     }
 }
